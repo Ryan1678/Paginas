@@ -6,12 +6,16 @@ import './Sidebar.css'
 import { useContext } from "react";
 import { Context } from "../context/Provider";
 import { FaHome } from "react-icons/fa";
+import teste from '../../assets/trento.jpg';
 export const Sidebar = () => {
 
      const {select} = useContext(Context)
    
   return (
     <nav>
+     <NavButtons link={'/Produto'} className="teste">
+          <img src={teste}/>
+          </NavButtons>
           <NavButtons link={'/'} className={`${select === '' ? 'select' : ''} home`} title={''}>
                <FaHome/> 
           </NavButtons>

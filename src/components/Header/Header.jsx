@@ -39,6 +39,7 @@ export const Header = () => {
       <span className={`restaurant ${isOpen ? 'open' : 'closed'}`}>
         Seg á Sex - 07:00 as 22:00
       </span>
+      <link to={'/Produto'}></link>
       <Cart/>
      <CartButton/>
     </header>
