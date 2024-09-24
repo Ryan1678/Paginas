@@ -13,8 +13,8 @@ export const Sidebar = () => {
    
   return (
     <nav>
-     <NavButtons link={'/Produto'} className="teste">
-          <img src={teste}/>
+     <NavButtons link={'/pedidos'} className="teste">
+          <button className="gerente">Gerenciar</button>
           </NavButtons>
           <NavButtons link={'/'} className={`${select === '' ? 'select' : ''} home`} title={''}>
                <FaHome/> 

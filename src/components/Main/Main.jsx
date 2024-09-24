@@ -8,7 +8,9 @@ import { ToastContainer, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Confirm } from '../../Pages/Form';
 import { Error } from '../../Pages/Error';
-
+import { Pedido } from '../../Pages/Pedidos/Pedido';
+import { Produto } from '../../Pages/Produtos/Produto';
+import { Funcionario } from '../../Pages/Funcionario/Funcionario'
 
 export const Main = () => {
 
@@ -16,6 +18,9 @@ export const Main = () => {
     <main className='flex flex-col justify-center items-center'>
       <Provider>
           <Routes>
+           <Route path='/pedidos' element ={<Pedido /> } />
+           <Route path='/funcionario' element ={<Funcionario /> } />
+           <Route path='/produtos' element ={<Produto /> } />
             <Route path='/' exact element={<Home />} />
             <Route path='/pizza' element={<Pizzas />} />
             <Route path='/hamburguer' element={<Hamburgueres />} />

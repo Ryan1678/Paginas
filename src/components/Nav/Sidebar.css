@@ -19,3 +19,11 @@ nav{
     width: 5%;
     
 }
+
+.gerente{
+    background-color: rgb(153, 16, 153);
+    border-radius: 10%;
+    width: 120px;
+    height: 35px;
+    color: white;
+}
