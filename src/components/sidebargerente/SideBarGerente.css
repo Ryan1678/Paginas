@@ -15,12 +15,17 @@
     align-items: center;
   }
   
+  .sair{margin-top: 260%;
+    color: white;
+    text-decoration: none;
+    font-size: 23px;
+    display: flex;
+    align-items: center;}
   .sidebar-logo {
     color: #e91e63;
     font-size: 30px;
     font-weight: bold;
   }
-  
   .sidebar ul {
     list-style-type: none;
     padding: 0;

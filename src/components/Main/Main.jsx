@@ -11,6 +11,7 @@ import { Error } from '../../Pages/Error';
 import { Pedido } from '../../Pages/Pedidos/Pedido';
 import { Produto } from '../../Pages/Produtos/Produto';
 import { Funcionario } from '../../Pages/Funcionario/Funcionario'
+import { Login } from '../../Pages/Login/Login'
 
 export const Main = () => {
 
@@ -19,6 +20,7 @@ export const Main = () => {
       <Provider>
           <Routes>
            <Route path='/pedidos' element ={<Pedido /> } />
+           <Route path='/login' element ={<Login /> } />
            <Route path='/funcionario' element ={<Funcionario /> } />
            <Route path='/produtos' element ={<Produto /> } />
             <Route path='/' exact element={<Home />} />

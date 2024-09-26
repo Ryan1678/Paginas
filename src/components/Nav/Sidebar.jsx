@@ -13,7 +13,7 @@ export const Sidebar = () => {
    
   return (
     <nav>
-     <NavButtons link={'/pedidos'} className="teste">
+     <NavButtons link={'/login'} className="teste">
           <button className="gerente">Gerenciar</button>
           </NavButtons>
           <NavButtons link={'/'} className={`${select === '' ? 'select' : ''} home`} title={''}>

@@ -11,6 +11,7 @@ const SideBarGerente = () => {
         <li><a href="/produtos">Produtos</a></li>
         <li><a href="/funcionario">Funcionários</a></li>
       </ul>
+      <h2 className="sair"><a href="/Login">Sair</a></h2>
     </aside>
   );
 };
