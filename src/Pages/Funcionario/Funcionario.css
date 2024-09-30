@@ -50,7 +50,8 @@ table {
   margin-top: 5%;
 }
 
-table th, table td {
+table th,
+table td {
   padding: 15px;
   text-align: left;
   border-bottom: 1px solid #ddd;
@@ -66,24 +67,6 @@ table tbody tr:nth-child(even) {
 
 table .id {
   color: #e91e63;
-}
-
-/* Responsividade */
-@media (max-width: 1024px) {
-  .filters {
-      grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 768px) {
-  .filters {
-      grid-template-columns: 1fr;
-  }
-
-  .main-content {
-      margin-left: 0;
-      padding: 20px;
-  }
 }
 
 /* Formulário de edição */
@@ -142,4 +125,70 @@ table .id {
 .adiciona:disabled {
   background-color: #cccccc;
   cursor: not-allowed;
+}
+
+/* Botões para ações na tabela */
+.edit-button,
+.delete-button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  margin-right: 10px; /* Espaçamento entre os botões */
+}
+
+.edit-button {
+  background-color: #ff6b81; /* Rosa para o botão de editar */
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #ff4757; /* Tom mais escuro ao passar o mouse */
+}
+
+.delete-button {
+  background-color: #e74c3c; /* Vermelho para o botão de excluir */
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #c0392b; /* Tom mais escuro ao passar o mouse */
+}
+
+/* Efeitos e acessibilidade */
+input,
+button {
+  outline: none;
+}
+
+input:focus,
+button:focus {
+  box-shadow: 0 0 8px rgba(255, 107, 129, 0.5);
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .filters {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .filters {
+    grid-template-columns: 1fr;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .products-container {
+    grid-template-columns: 1fr; /* Uma coluna em telas pequenas */
+  }
 }

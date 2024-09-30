@@ -39,6 +39,11 @@ export const Pedido = () => {
     setIsEditing(false); 
   };
 
+  const handleDeleteClick = (id) => {
+    const updatedPedidos = pedidos.filter(pedido => pedido.id !== id);
+    setPedidos(updatedPedidos);
+  };
+
   return (
     <div className="container">
       <SideBarGerente />
@@ -116,8 +121,9 @@ export const Pedido = () => {
                 <td>{pedido.email}</td>
                 <td>{pedido.metodo}</td>
                 <td>{pedido.status}</td>
-                <td>
-                  <button onClick={() => handleEditClick(pedido)}>Editar</button>
+                <td className="product-actions">
+                  <button className="edit-button" onClick={() => handleEditClick(pedido)}>Editar</button>
+                  <button className="delete-button" onClick={() => handleDeleteClick(pedido.id)}>Excluir</button>
                 </td>
               </tr>
             ))}

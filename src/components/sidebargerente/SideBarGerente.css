@@ -1,68 +1,80 @@
-
-
-
+/* Estilos para o menu lateral */
 .sidebar {
-    width: 15%; 
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #2C2C2C;
-    color: white;
-    padding: 30px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .sair{margin-top: 260%;
-    color: white;
-    text-decoration: none;
-    font-size: 23px;
-    display: flex;
-    align-items: center;}
-  .sidebar-logo {
-    color: #e91e63;
-    font-size: 30px;
-    font-weight: bold;
-  }
-  .sidebar ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .sidebar ul li {
-    margin: 20px 0;
-  }
-  
-  .sidebar ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 23px;
-    display: flex;
-    align-items: center;
-  }
-  .sidebar ul li a:hover {
-    color: red;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-  }
-  
+  width: 250px;
+  background-color: #000000; /* Fundo preto */
+  color: white;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease; /* Suavização */
+}
 
-  
+.sidebar-logo {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: #ff69b4; /* Cor rosa para o logo */
+  text-align: center;
+}
 
-  @media (max-width: 768px) {
-    .sidebar {
-      width: 100%;
-      height: auto; 
-      position: relative; 
-      padding: 20px;
-    }
-  
-    .sidebar-logo {
-      font-size: 20px;
-    }
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 20px;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: #bdc3c7; /* Cor suave para o texto */
+  font-size: 18px;
+  padding: 10px 15px;
+  display: block;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s; /* Animação suave */
+}
+
+.sidebar ul li a:hover {
+  background-color: #ff69b4; /* Cor rosa ao passar o mouse */
+  color: white; /* Texto branco ao passar o mouse */
+}
+
+.sidebar ul li a.active {
+  background-color: #ff1493; /* Cor rosa para o item ativo */
+  color: white; /* Texto branco para o item ativo */
+  transform: scale(1.05); /* Animação de aumento ao ativar */
+}
+
+.sidebar ul li a i {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+/* Estilos para o botão de sair */
+.sair {
+  margin-top: 60px; /* Aumentado para afastar do menu */
+  text-align: center;
+}
+
+.sair a {
+  text-decoration: none;
+  color: #ff69b4; /* Cor rosa para o link de sair */
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.sair a:hover {
+  color: #ff1493; /* Rosa mais escuro ao passar o mouse */
+}
+
+/* Responsividade para menu lateral */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
   }
-  
+}

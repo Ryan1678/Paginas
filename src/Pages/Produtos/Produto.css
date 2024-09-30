@@ -1,31 +1,43 @@
+/* Fonte global e reset */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff; /* Fundo branco */
+  color: #333;
+}
+
 /* Container principal da tela de produtos */
 .products-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  padding: 40px;
-  background-color: #f9f9f9;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adaptação responsiva */
+  gap: 30px;
+  padding: 50px;
+  background-color: #f9f9f9; /* Fundo suave para contraste */
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Sombra para o container */
 }
 
 /* Estilos para cada card de produto */
 .product-card {
-  background-color: #fff;
-  border-radius: 10px;
+  background-color: #ffffff; /* Branco para os cards */
+  border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); /* Sombra mais pronunciada ao passar o mouse */
 }
 
 /* Imagem do produto */
 .product-image {
   width: 100%;
-  height: 200px;
+  height: 240px; /* Altura consistente para a imagem */
   object-fit: cover;
+  border-bottom: 4px solid #ff6b81; /* Borda colorida */
 }
 
 /* Informações do produto */
@@ -35,15 +47,16 @@
 }
 
 .product-name {
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
+  font-size: 20px;
+  font-weight: 600;
+  color: #2c3e50;
   margin-bottom: 10px;
+  text-transform: capitalize;
 }
 
 .product-price {
-  color: #e91e63; /* Destaque de cor rosa para o preço */
-  font-size: 20px;
+  color: #e74c3c;
+  font-size: 22px;
   font-weight: bold;
   margin-bottom: 10px;
 }
@@ -52,24 +65,55 @@
 .product-actions {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 50px; /* Aumenta a distância entre os botões */
   padding: 15px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid #eaeaea;
 }
 
-.product-actions button {
-  padding: 10px 20px;
-  background-color: #ff69b4; /* Rosa para os botões */
+/* Estilos do botão de editar */
+.edit-button {
+  padding: 12px 24px;
+  background-color: #ff6b81; /* Rosa para o botão de editar */
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px; /* Bordas arredondadas */
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.product-actions button:hover {
-  background-color: #ff1493;
-  transform: translateY(-2px);
+.edit-button:hover {
+  background-color: #ff4757; /* Tom mais escuro ao passar o mouse */
+}
+
+.edit-button:active {
+  transform: scale(0.95); /* Efeito de clique */
+  box-shadow: none; /* Remove a sombra ao clicar */
+}
+
+/* Estilos do botão de excluir */
+.delete-button {
+  padding: 12px 24px;
+  background-color: #e74c3c; /* Vermelho para o botão de excluir */
+  color: white;
+  border: none;
+  border-radius: 10px; /* Bordas arredondadas */
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #c0392b; /* Tom mais escuro ao passar o mouse */
+  transform: translateY(-3px); /* Levitar */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra ao passar o mouse */
+}
+
+.delete-button:active {
+  transform: scale(0.95); /* Efeito de clique */
+  box-shadow: none; /* Remove a sombra ao clicar */
 }
 
 /* Efeitos e acessibilidade */
@@ -78,18 +122,18 @@ input, button {
 }
 
 input:focus, button:focus {
-  box-shadow: 0 0 5px rgba(233, 30, 99, 0.3);
+  box-shadow: 0 0 8px rgba(255, 107, 129, 0.5);
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
-  .product-card {
-    margin-bottom: 20px;
+  .products-container {
+    padding: 20px; /* Menos padding em telas menores */
   }
 }
 
 @media (max-width: 480px) {
   .products-container {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Uma coluna em telas pequenas */
   }
 }

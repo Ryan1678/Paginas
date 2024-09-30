@@ -44,6 +44,11 @@ export const Produto = () => {
     setIsAdding(false);
   };
 
+  const handleDeleteClick = (id) => {
+    const updatedProdutos = produtos.filter((produto) => produto.id !== id);
+    setProdutos(updatedProdutos);
+  };
+
   return (
     <div className="container">
       <SideBarGerente />
@@ -123,7 +128,8 @@ export const Produto = () => {
                 <td>{produto.preco}</td>
                 <td>{produto.descricao}</td>
                 <td>
-                  <button onClick={() => handleEditClick(produto)}>Editar</button>
+                  <button className="edit-button" onClick={() => handleEditClick(produto)}>Editar</button>
+                  <button className="delete-button" onClick={() => handleDeleteClick(produto.id)} style={{ marginLeft: '20px' }}>Excluir</button> {/* Aumenta a distância */}
                 </td>
               </tr>
             ))}

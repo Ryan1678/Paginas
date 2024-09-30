@@ -13,27 +13,27 @@
 /* Conteúdo Principal */
 .main-content {
   flex: 1; /* Usar flex para ajuste dinâmico */
-  padding: 40px;
+  padding: 20px; /* Reduzido para um espaçamento mais compacto */
   background-color: #f9f9f9;
   overflow-y: auto; /* Permite scroll no conteúdo se necessário */
 }
 
 .main-content h1 {
-  font-size: 32px;
-  margin-bottom: 20px;
+  font-size: 28px; /* Diminuído para um tamanho mais compacto */
+  margin-bottom: 15px; /* Ajustado o espaçamento inferior */
 }
 
 /* Filtros */
 .filters {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  margin-bottom: 20px;
+  gap: 15px; /* Diminuído para um espaçamento menor */
+  margin-bottom: 15px; /* Ajustado o espaçamento inferior */
 }
 
 .filters input {
-  padding: 10px;
-  font-size: 16px;
+  padding: 8px; /* Reduzido para um padding mais compacto */
+  font-size: 14px; /* Ajustado o tamanho da fonte */
   border: 1px solid #ddd;
   border-radius: 4px;
   transition: border-color 0.3s;
@@ -56,7 +56,7 @@ table {
 }
 
 table th, table td {
-  padding: 15px;
+  padding: 10px; /* Reduzido para um padding mais compacto */
   text-align: left;
   border-bottom: 1px solid #ddd;
 }
@@ -87,27 +87,28 @@ table .id {
   }
 
   .main-content {
-      padding: 20px;
+      padding: 10px; /* Reduzido para um espaçamento mais compacto */
   }
 }
 
 /* Formulário de Edição */
 .edit-form {
   background-color: #fff;
-  padding: 20px;
+  padding: 15px; /* Reduzido para um padding mais compacto */
   border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Reduzido para uma sombra mais leve */
+  margin-bottom: 20px; /* Espaço entre o formulário e a tabela */
 }
 
 .edit-form h2 {
   margin-bottom: 10px;
+  font-size: 24px; /* Ajustado o tamanho do título */
 }
 
 .edit-form input {
   display: block;
   width: 100%;
-  padding: 10px;
+  padding: 8px; /* Reduzido para um padding mais compacto */
   margin-bottom: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -121,13 +122,48 @@ table .id {
 .edit-form button {
   background-color: #e91e63;
   color: white;
-  padding: 10px 20px;
+  padding: 8px 15px; /* Reduzido para um tamanho mais compacto */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 14px; /* Ajustado o tamanho da fonte */
+}
+
+.edit-form button:hover {
+  background-color: #d81b60;
+}
+
+/* Estilo dos Botões */
+.product-actions {
+  display: flex;
+  gap: 10px; /* Adicionando espaço entre os botões */
+}
+
+.edit-button {
+  background-color: #007bff; /* Cor do botão Editar */
+  color: white;
+  padding: 8px 15px; /* Reduzido para um tamanho mais compacto */
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
-.edit-form button:hover {
-  background-color: #d81b60;
+.edit-button:hover {
+  background-color: #0056b3; /* Cor do botão Editar ao passar o mouse */
+}
+
+.delete-button {
+  background-color: #dc3545; /* Cor do botão Excluir */
+  color: white;
+  padding: 8px 15px; /* Reduzido para um tamanho mais compacto */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.delete-button:hover {
+  background-color: #c82333; /* Cor do botão Excluir ao passar o mouse */
 }
