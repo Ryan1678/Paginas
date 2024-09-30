@@ -4,8 +4,8 @@ import SideBarGerente from '../../components/sidebargerente/SideBarGerente';
 
 export const Funcionario = () => {
   const [funcionarios, setFuncionarios] = useState([
-    { id: 1, nome: 'Funcionário 1', email: 'email1@example.com', senha: 'senha1' },
-    { id: 2, nome: 'Funcionário 2', email: 'email2@example.com', senha: 'senha2' },
+    { id: 1, nome: 'Ryan Amorim Dantas', email: 'ryanamorim@gmail.com', senha: '654321' },
+    { id: 2, nome: 'Lanny Caroliny Alves Aguiar', email: 'lannycaroliny@gmail.com', senha: '123456' },
   ]);
 
   const [isEditing, setIsEditing] = useState(false);

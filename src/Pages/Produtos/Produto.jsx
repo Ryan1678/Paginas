@@ -4,9 +4,10 @@ import SideBarGerente from '../../components/sidebargerente/SideBarGerente';
 
 export const Produto = () => {
   const [produtos, setProdutos] = useState([
-    { id: 1, imagem: 'url1', nome: 'Produto 1', tipo: 'Tipo A', preco: 'R$ 10,00', descricao: 'Descrição 1' },
-    { id: 2, imagem: 'url2', nome: 'Produto 2', tipo: 'Tipo B', preco: 'R$ 20,00', descricao: 'Descrição 2' },
-    // ... Adicione outros produtos conforme necessário
+    { id: 1, imagem: 'url1', nome: 'Coca-cola 200ml', tipo: 'Bebida', preco: 'R$ 3,50', descricao: 'Refrigerante revigorante de 200ml' },
+    { id: 2, imagem: 'url2', nome: 'Fini Mini', tipo: 'Doce', preco: 'R$ 1,00', descricao: 'Bala doce feita com corante' },
+    { id: 6, imagem: 'url2', nome: 'Dolly 350ml', tipo: 'Bebida', preco: 'R$ 5,00', descricao: 'Refrigerante revigorante de 350ml' },
+    { id: 4, imagem: 'url2', nome: 'Sukita 300ml', tipo: 'Bebida', preco: 'R$ 4,50', descricao: 'Refrigerante revigorante de 300ml' },
   ]);
 
   const [isEditing, setIsEditing] = useState(false);

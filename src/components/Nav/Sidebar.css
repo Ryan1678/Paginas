@@ -21,9 +21,9 @@ nav{
 }
 
 .gerente{
-    background-color: rgb(153, 16, 153);
+    background-color:  #131010;
     border-radius: 10%;
     width: 120px;
     height: 35px;
-    color: white;
+    color: rgb(0, 0, 0);
 }
