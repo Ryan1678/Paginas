@@ -4,15 +4,15 @@ import SideBarGerente from '../../components/sidebargerente/SideBarGerente';
 
 export const Pedido = () => {
   const [pedidos, setPedidos] = useState([
-    { id: 577, data: '23/09/2022', emissor: 'Nome', email: 'example@example', metodo: 'Pix', status: 'Recebido' },
-    { id: 57, data: '23/09/2022', emissor: 'Nome', email: 'example@example', metodo: 'Cartão', status: 'Recebido' },
-    { id: 66, data: '23/09/2022', emissor: 'Nome', email: 'example@example', metodo: 'Pix', status: 'Recebido' },
-    { id: 60, data: '23/09/2022', emissor: 'Nome', email: 'example@example', metodo: 'Pix', status: 'Recebido' },
-    { id: 679, data: '23/09/2022', emissor: 'Nome', email: 'example@example', metodo: 'Pix', status: 'Recebido' },
-    { id: 67, data: '23/09/2022', emissor: 'Nome', email: 'example@example', metodo: 'Pix', status: 'Recebido' },
-    { id: 43, data: '23/09/2022', emissor: 'Nome', email: 'example@example', metodo: 'Pix', status: 'Recebido' },
-    { id: 689, data: '23/09/2022', emissor: 'Nome', email: 'example@example', metodo: 'Pix', status: 'Recebido' },
-    { id: 58, data: '23/09/2022', emissor: 'Nome', email: 'example@example', metodo: 'Pix', status: 'Recebido' },
+    { id: 577, data: '23/08/2024', emissor: 'Isabela', email: 'example@example', metodo: 'Pix', status: 'Recebido' },
+    { id: 57, data: '20/09/2024', emissor: 'Luana', email: 'example@example', metodo: 'Cartão', status: 'Recebido' },
+    { id: 66, data: '21/09/2024', emissor: 'Ryan', email: 'example@example', metodo: 'Pix', status: 'Recebido' },
+    { id: 60, data: '22/09/2024', emissor: 'Lanny', email: 'example@example', metodo: 'Pix', status: 'Recebido' },
+    { id: 679, data: '23/09/2024', emissor: 'Adriano', email: 'example@example', metodo: 'Pix', status: 'Recebido' },
+    { id: 67, data: '24/09/2024', emissor: 'Juana', email: 'example@example', metodo: 'Cartão', status: 'Recebido' },
+    { id: 43, data: '25/09/2024', emissor: 'Liliane', email: 'example@example', metodo: 'Pix', status: 'Recebido' },
+    { id: 689, data: '25/09/2024', emissor: 'Luiz', email: 'example@example', metodo: 'Pix', status: 'Recebido' },
+    { id: 58, data: '25/09/2024', emissor: 'Gustavo', email: 'example@example', metodo: 'Pix', status: 'Recebido' },
   ]);
 
   const [isEditing, setIsEditing] = useState(false); 
