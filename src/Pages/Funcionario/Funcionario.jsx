@@ -1,51 +1,71 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './Funcionario.css';
 import SideBarGerente from '../../components/sidebargerente/SideBarGerente';
 
 export const Funcionario = () => {
-  const [funcionarios, setFuncionarios] = useState([
-    { id: 1, nome: 'Ryan Amorim Dantas', email: 'ryanamorim@gmail.com', senha: '654321' },
-    { id: 2, nome: 'Lanny Caroliny Alves Aguiar', email: 'lannycaroliny@gmail.com', senha: '123456' },
-  ]);
+  const [employees, setEmployees] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [currentEmployee, setCurrentEmployee] = useState({ id: '', nome: '', email: '', senha: '' });
+  const [isEdit, setIsEdit] = useState(false);
 
-  const [isEditing, setIsEditing] = useState(false);
-  const [isAdding, setIsAdding] = useState(false);
-  const [currentFuncionario, setCurrentFuncionario] = useState(null);
+  useEffect(() => {
+    fetchEmployees(); 
+  }, []);
 
-  const handleEditClick = (funcionario) => {
-    setIsEditing(true);
-    setCurrentFuncionario({ ...funcionario });
+  const fetchEmployees = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/funcionario"); 
+      setEmployees(response.data);
+    } catch (error) {
+      console.error("Erro ao buscar funcionários:", error);
+    }
   };
 
   const handleAddClick = () => {
-    setIsAdding(true);
-    setCurrentFuncionario({ id: '', nome: '', email: '', senha: '' });
+    setCurrentEmployee({ id: '', nome: '', email: '', senha: '' });
+    setIsEdit(false);
+    setModalVisible(true);
+  };
+
+  const handleEditClick = (employee) => {
+    setCurrentEmployee(employee);
+    setIsEdit(true);
+    setModalVisible(true);
+  };
+
+  const handleDeleteClick = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8080/funcionario/${id}`); 
+      setEmployees(employees.filter((employee) => employee.id !== id));
+    } catch (error) {
+      console.error("Erro ao excluir funcionário:", error);
+    }
+  };
+
+  const handleSaveClick = async () => {
+    try {
+      if (isEdit) {
+        // Atualizar funcionário existente
+        await axios.put(`http://localhost:8080/funcionario/${currentEmployee.id}`, currentEmployee); 
+        setEmployees(employees.map((emp) => (emp.id === currentEmployee.id ? currentEmployee : emp)));
+      } else {
+        // Adicionar novo funcionário
+        const response = await axios.post("http://localhost:8080/funcionario", currentEmployee); 
+        setEmployees([...employees, response.data]);
+      }
+      setModalVisible(false);
+    } catch (error) {
+      console.error("Erro ao salvar funcionário:", error);
+    }
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setCurrentFuncionario({
-      ...currentFuncionario,
+    setCurrentEmployee({
+      ...currentEmployee,
       [name]: value,
     });
-  };
-
-  const handleSaveClick = () => {
-    if (isAdding) {
-      setFuncionarios([...funcionarios, { ...currentFuncionario, id: funcionarios.length + 1 }]);
-    } else {
-      const updatedFuncionarios = funcionarios.map((funcionario) =>
-        funcionario.id === currentFuncionario.id ? currentFuncionario : funcionario
-      );
-      setFuncionarios(updatedFuncionarios);
-    }
-    setIsEditing(false);
-    setIsAdding(false);
-  };
-
-  const handleDeleteClick = (id) => {
-    const updatedFuncionarios = funcionarios.filter(funcionario => funcionario.id !== id);
-    setFuncionarios(updatedFuncionarios);
   };
 
   return (
@@ -56,38 +76,41 @@ export const Funcionario = () => {
         <button className="adiciona" onClick={handleAddClick}>Adicionar Funcionário</button>
 
         {/* Formulário de edição/adicionamento */}
-        {(isEditing || isAdding) && (
+        {modalVisible && (
           <div className="edit-form">
-            <h2>{isAdding ? 'Adicionar Funcionário' : 'Editar Funcionário'}</h2>
-            <input
-              type="text"
-              name="id"
-              value={currentFuncionario.id}
-              disabled
-              placeholder="ID"
-            />
+            <h2>{isEdit ? 'Editar Funcionário' : 'Adicionar Funcionário'}</h2>
+            {isEdit && (
+              <input
+                type="text"
+                name="id"
+                value={currentEmployee.id}
+                disabled
+                placeholder="ID"
+              />
+            )}
             <input
               type="text"
               name="nome"
-              value={currentFuncionario.nome}
+              value={currentEmployee.nome}
               onChange={handleInputChange}
               placeholder="Nome"
             />
             <input
               type="email"
               name="email"
-              value={currentFuncionario.email}
+              value={currentEmployee.email}
               onChange={handleInputChange}
               placeholder="Email"
             />
             <input
               type="password"
               name="senha"
-              value={currentFuncionario.senha}
+              value={currentEmployee.senha}
               onChange={handleInputChange}
               placeholder="Senha"
             />
             <button onClick={handleSaveClick}>Salvar</button>
+            <button onClick={() => setModalVisible(false)}>Cancelar</button>
           </div>
         )}
 
@@ -102,15 +125,15 @@ export const Funcionario = () => {
             </tr>
           </thead>
           <tbody>
-            {funcionarios.map((funcionario) => (
-              <tr key={funcionario.id}>
-                <td>{funcionario.id}</td>
-                <td>{funcionario.nome}</td>
-                <td>{funcionario.email}</td>
-                <td>{funcionario.senha}</td>
+            {employees.map((employee) => (
+              <tr key={employee.id}>
+                <td>{employee.id}</td>
+                <td>{employee.nome}</td>
+                <td>{employee.email}</td>
+                <td>{employee.seha}</td>
                 <td>
-                  <button className="edit-button" onClick={() => handleEditClick(funcionario)}>Editar</button>
-                  <button className="delete-button" onClick={() => handleDeleteClick(funcionario.id)}>Excluir</button>
+                  <button className="edit-button" onClick={() => handleEditClick(employee)}>Editar</button>
+                  <button className="delete-button" onClick={() => handleDeleteClick(employee.id)}>Excluir</button>
                 </td>
               </tr>
             ))}
