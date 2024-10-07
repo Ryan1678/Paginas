@@ -44,6 +44,10 @@ export const Funcionario = () => {
   };
 
   const handleSaveClick = async () => {
+    if (!currentEmployee.nome || !currentEmployee.email || !currentEmployee.senha) {
+      alert("Preencha todos os campos");
+      return;
+    }
     try {
       if (isEdit) {
         // Atualizar funcionário existente
@@ -127,10 +131,9 @@ export const Funcionario = () => {
           <tbody>
             {employees.map((employee) => (
               <tr key={employee.id}>
-                <td>{employee.id}</td>
                 <td>{employee.nome}</td>
                 <td>{employee.email}</td>
-                <td>{employee.seha}</td>
+                <td>{employee.senha}</td>
                 <td>
                   <button className="edit-button" onClick={() => handleEditClick(employee)}>Editar</button>
                   <button className="delete-button" onClick={() => handleDeleteClick(employee.id)}>Excluir</button>
