@@ -104,12 +104,12 @@ export const Pedido = () => {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Data</th>
-              <th>Emissor</th>
-              <th>Email</th>
-              <th>Método</th>
-              <th>Status</th>
-              <th>Ações</th>
+              <th>DATA</th>
+              <th>EMISSOR</th>
+              <th>EMAIL</th>
+              <th>MÉTODO</th>
+              <th>STATUS</th>
+              <th>AÇÕES</th>
             </tr>
           </thead>
           <tbody>

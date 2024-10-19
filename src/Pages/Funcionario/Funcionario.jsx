@@ -131,6 +131,7 @@ export const Funcionario = () => {
           <tbody>
             {employees.map((employee) => (
               <tr key={employee.id}>
+                <td className="id">{employee.id}</td>
                 <td>{employee.nome}</td>
                 <td>{employee.email}</td>
                 <td>{employee.senha}</td>
