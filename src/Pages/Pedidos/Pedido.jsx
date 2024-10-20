@@ -1,26 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { format, parseISO } from 'date-fns'; // Importa parseISO também
 import './Pedido.css';
 import SideBarGerente from '../../components/sidebargerente/SideBarGerente';
 
 export const Pedido = () => {
-  const [pedidos, setPedidos] = useState([
-    { id: 577, data: '23/08/2024', emissor: 'Isabela', email: 'example@example', metodo: 'Pix', status: 'Recebido' },
-    { id: 57, data: '20/09/2024', emissor: 'Luana', email: 'example@example', metodo: 'Cartão', status: 'Recebido' },
-    { id: 66, data: '21/09/2024', emissor: 'Ryan', email: 'example@example', metodo: 'Pix', status: 'Recebido' },
-    { id: 60, data: '22/09/2024', emissor: 'Lanny', email: 'example@example', metodo: 'Pix', status: 'Recebido' },
-    { id: 679, data: '23/09/2024', emissor: 'Adriano', email: 'example@example', metodo: 'Pix', status: 'Recebido' },
-    { id: 67, data: '24/09/2024', emissor: 'Juana', email: 'example@example', metodo: 'Cartão', status: 'Recebido' },
-    { id: 43, data: '25/09/2024', emissor: 'Liliane', email: 'example@example', metodo: 'Pix', status: 'Recebido' },
-    { id: 689, data: '25/09/2024', emissor: 'Luiz', email: 'example@example', metodo: 'Pix', status: 'Recebido' },
-    { id: 58, data: '25/09/2024', emissor: 'Gustavo', email: 'example@example', metodo: 'Pix', status: 'Recebido' },
-  ]);
-
-  const [isEditing, setIsEditing] = useState(false); 
+  const [pedidos, setPedidos] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
   const [currentPedido, setCurrentPedido] = useState(null);
+
+  useEffect(() => {
+    fetch('http://localhost:8080/pedido')
+      .then(response => response.json())
+      .then(data => setPedidos(data))
+      .catch(error => console.error('Erro ao carregar pedidos:', error));
+  }, []);
 
   const handleEditClick = (pedido) => {
     setIsEditing(true);
-    setCurrentPedido({ ...pedido }); 
+    setCurrentPedido({ ...pedido });
   };
 
   const handleInputChange = (e) => {
@@ -32,16 +29,38 @@ export const Pedido = () => {
   };
 
   const handleSaveClick = () => {
-    const updatedPedidos = pedidos.map((pedido) =>
-      pedido.id === currentPedido.id ? currentPedido : pedido
-    );
-    setPedidos(updatedPedidos); 
-    setIsEditing(false); 
+    fetch(`http://localhost:8080/pedido/${currentPedido.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(currentPedido),
+    })
+      .then(response => response.json())
+      .then(updatedPedido => {
+        const updatedPedidos = pedidos.map(pedido =>
+          pedido.id === updatedPedido.id ? updatedPedido : pedido
+        );
+        setPedidos(updatedPedidos);
+        setIsEditing(false);  // Fecha o formulário de edição
+      })
+      .catch(error => console.error('Erro ao atualizar pedido:', error));
   };
 
   const handleDeleteClick = (id) => {
-    const updatedPedidos = pedidos.filter(pedido => pedido.id !== id);
-    setPedidos(updatedPedidos);
+    fetch(`http://localhost:8080/pedido/${id}`, {
+      method: 'DELETE',
+    })
+      .then(() => {
+        const updatedPedidos = pedidos.filter(pedido => pedido.id !== id);
+        setPedidos(updatedPedidos);
+      })
+      .catch(error => console.error('Erro ao excluir pedido:', error));
+  };
+
+  const handleCancelClick = () => {
+    setIsEditing(false);  // Fecha o formulário sem salvar as alterações
+    setCurrentPedido(null);  // Limpa o estado do pedido atual
   };
 
   return (
@@ -64,7 +83,7 @@ export const Pedido = () => {
             <input
               type="text"
               name="data"
-              value={currentPedido.data}
+              value={currentPedido.data_hora_compra}
               onChange={handleInputChange}
               placeholder="Data"
             />
@@ -96,7 +115,11 @@ export const Pedido = () => {
               onChange={handleInputChange}
               placeholder="Status"
             />
-            <button onClick={handleSaveClick}>Salvar</button>
+            
+            <div className="edit-buttons">
+              <button onClick={handleSaveClick}>Salvar</button>
+              <button onClick={handleCancelClick}>Cancelar</button>
+            </div>
           </div>
         )}
 
@@ -116,7 +139,8 @@ export const Pedido = () => {
             {pedidos.map((pedido) => (
               <tr key={pedido.id}>
                 <td className="id">{pedido.id}</td>
-                <td>{pedido.data}</td>
+                {/* Formata a data para mostrar apenas o dia, mês e ano */}
+                <td>{pedido.data_hora_compra ? format(parseISO(pedido.data_hora_compra), 'dd/MM/yyyy') : 'N/A'}</td>
                 <td>{pedido.emissor}</td>
                 <td>{pedido.email}</td>
                 <td>{pedido.metodo}</td>

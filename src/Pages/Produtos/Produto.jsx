@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Produto.css';
 import SideBarGerente from '../../components/sidebargerente/SideBarGerente';
 
 export const Produto = () => {
-  const [produtos, setProdutos] = useState([
-    { id: 1, imagem: 'url1', nome: 'Coca-cola 200ml', tipo: 'Bebida', preco: 'R$ 3,50', descricao: 'Refrigerante revigorante de 200ml' },
-    { id: 2, imagem: 'url2', nome: 'Fini Mini', tipo: 'Doce', preco: 'R$ 1,00', descricao: 'Bala doce feita com corante' },
-    { id: 6, imagem: 'url2', nome: 'Dolly 350ml', tipo: 'Bebida', preco: 'R$ 5,00', descricao: 'Refrigerante revigorante de 350ml' },
-    { id: 4, imagem: 'url2', nome: 'Sukita 300ml', tipo: 'Bebida', preco: 'R$ 4,50', descricao: 'Refrigerante revigorante de 300ml' },
-  ]);
-
+  const [produtos, setProdutos] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
   const [currentProduto, setCurrentProduto] = useState(null);
+  const [imageFile, setImageFile] = useState(null); // Estado para o arquivo da imagem
+
+  // Fetch produtos from the backend on component mount
+  useEffect(() => {
+    fetch('http://localhost:8080/produto')
+      .then(response => response.json())
+      .then(data => setProdutos(data))
+      .catch(error => console.error('Erro ao carregar produtos:', error));
+  }, []);
 
   const handleEditClick = (produto) => {
     setIsEditing(true);
@@ -21,7 +24,8 @@ export const Produto = () => {
 
   const handleAddClick = () => {
     setIsAdding(true);
-    setCurrentProduto({ id: '', imagem: '', nome: '', tipo: '', preco: '', descricao: '' });
+    setCurrentProduto({ id: '', imagem: '', nome: '', tipo: '', preco: 0.0, descricao: '' });
+    setImageFile(null); // Resetar a imagem ao adicionar novo produto
   };
 
   const handleInputChange = (e) => {
@@ -32,22 +36,82 @@ export const Produto = () => {
     });
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setCurrentProduto({
+          ...currentProduto,
+          imagem: reader.result, // Armazenar a imagem como base64
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleSaveClick = () => {
     if (isAdding) {
-      setProdutos([...produtos, { ...currentProduto, id: produtos.length + 1 }]);
+      fetch('http://localhost:8080/produto', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(currentProduto),
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Erro ao adicionar produto');
+          }
+          return response.json();
+        })
+        .then(newProduto => {
+          setProdutos([...produtos, newProduto]);
+          setIsAdding(false);
+          setCurrentProduto(null);
+        })
+        .catch(error => console.error('Erro ao adicionar produto:', error));
     } else {
-      const updatedProdutos = produtos.map((produto) =>
-        produto.id === currentProduto.id ? currentProduto : produto
-      );
-      setProdutos(updatedProdutos);
+      fetch(`http://localhost:8080/produto/${currentProduto.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(currentProduto),
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Erro ao atualizar produto');
+          }
+          return response.json();
+        })
+        .then(updatedProduto => {
+          const updatedProdutos = produtos.map(produto =>
+            produto.id === updatedProduto.id ? updatedProduto : produto
+          );
+          setProdutos(updatedProdutos);
+          setIsEditing(false);
+          setCurrentProduto(null);
+        })
+        .catch(error => console.error('Erro ao atualizar produto:', error));
     }
+  };
+
+  const handleCancelClick = () => {
     setIsEditing(false);
     setIsAdding(false);
+    setCurrentProduto(null); // Reset currentProduto to clear the form
   };
 
   const handleDeleteClick = (id) => {
-    const updatedProdutos = produtos.filter((produto) => produto.id !== id);
-    setProdutos(updatedProdutos);
+    fetch(`http://localhost:8080/produto/${id}`, {
+      method: 'DELETE',
+    })
+      .then(() => {
+        const updatedProdutos = produtos.filter(produto => produto.id !== id);
+        setProdutos(updatedProdutos);
+      })
+      .catch(error => console.error('Erro ao excluir produto:', error));
   };
 
   return (
@@ -69,11 +133,9 @@ export const Produto = () => {
               placeholder="ID"
             />
             <input
-              type="text"
-              name="imagem"
-              value={currentProduto.imagem}
-              onChange={handleInputChange}
-              placeholder="Imagem URL"
+              type="file" // Campo de upload de imagem
+              accept="image/*"
+              onChange={handleImageChange}
             />
             <input
               type="text"
@@ -90,7 +152,7 @@ export const Produto = () => {
               placeholder="Tipo"
             />
             <input
-              type="text"
+              type="number" // Use number input for price
               name="preco"
               value={currentProduto.preco}
               onChange={handleInputChange}
@@ -104,6 +166,7 @@ export const Produto = () => {
               placeholder="Descrição"
             />
             <button onClick={handleSaveClick}>Salvar</button>
+            <button onClick={handleCancelClick} style={{ marginLeft: '10px' }}>Cancelar</button>
           </div>
         )}
 
@@ -126,11 +189,11 @@ export const Produto = () => {
                 <td><img src={produto.imagem} alt={produto.nome} width="50" /></td>
                 <td>{produto.nome}</td>
                 <td>{produto.tipo}</td>
-                <td>{produto.preco}</td>
+                <td>{`R$ ${produto.preco.toFixed(2).replace('.', ',')}`}</td>
                 <td>{produto.descricao}</td>
                 <td>
                   <button className="edit-button" onClick={() => handleEditClick(produto)}>Editar</button>
-                  <button className="delete-button" onClick={() => handleDeleteClick(produto.id)} style={{ marginLeft: '20px' }}>Excluir</button> {/* Aumenta a distância */}
+                  <button className="delete-button" onClick={() => handleDeleteClick(produto.id)} style={{ marginLeft: '20px' }}>Excluir</button>
                 </td>
               </tr>
             ))}

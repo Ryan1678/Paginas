@@ -1,5 +1,3 @@
-/* Pedido.css */
-
 /* Container Principal */
 .container {
   display: flex;
@@ -13,27 +11,27 @@
 /* Conteúdo Principal */
 .main-content {
   flex: 1; /* Usar flex para ajuste dinâmico */
-  padding: 20px; /* Reduzido para um espaçamento mais compacto */
+  padding: 20px;
   background-color: #f9f9f9;
   overflow-y: auto; /* Permite scroll no conteúdo se necessário */
 }
 
 .main-content h1 {
-  font-size: 28px; /* Diminuído para um tamanho mais compacto */
-  margin-bottom: 15px; /* Ajustado o espaçamento inferior */
+  font-size: 28px;
+  margin-bottom: 15px;
 }
 
 /* Filtros */
 .filters {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 15px; /* Diminuído para um espaçamento menor */
-  margin-bottom: 15px; /* Ajustado o espaçamento inferior */
+  gap: 15px;
+  margin-bottom: 15px;
 }
 
 .filters input {
-  padding: 8px; /* Reduzido para um padding mais compacto */
-  font-size: 14px; /* Ajustado o tamanho da fonte */
+  padding: 8px;
+  font-size: 14px;
   border: 1px solid #ddd;
   border-radius: 4px;
   transition: border-color 0.3s;
@@ -41,7 +39,7 @@
 
 .filters input:focus {
   border-color: #e91e63; /* Mudança de cor ao focar */
-  outline: none; /* Remove borda padrão */
+  outline: none;
 }
 
 /* Tabela de Pedidos */
@@ -52,11 +50,11 @@ table {
   border: 1px solid #ddd;
   border-radius: 10px;
   overflow: hidden;
-  margin-top: 20px; /* Espaçamento superior */
+  margin-top: 20px;
 }
 
 table th, table td {
-  padding: 10px; /* Reduzido para um padding mais compacto */
+  padding: 10px;
   text-align: left;
   border-bottom: 1px solid #ddd;
 }
@@ -77,38 +75,38 @@ table .id {
 /* Responsividade */
 @media (max-width: 1024px) {
   .filters {
-      grid-template-columns: repeat(2, 1fr); /* Dois colunas */
+    grid-template-columns: repeat(2, 1fr); /* Duas colunas */
   }
 }
 
 @media (max-width: 768px) {
   .filters {
-      grid-template-columns: 1fr; /* Uma coluna */
+    grid-template-columns: 1fr; /* Uma coluna */
   }
 
   .main-content {
-      padding: 10px; /* Reduzido para um espaçamento mais compacto */
+    padding: 10px; /* Reduzido para telas menores */
   }
 }
 
 /* Formulário de Edição */
 .edit-form {
   background-color: #fff;
-  padding: 15px; /* Reduzido para um padding mais compacto */
+  padding: 15px;
   border-radius: 10px;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Reduzido para uma sombra mais leve */
-  margin-bottom: 20px; /* Espaço entre o formulário e a tabela */
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
 .edit-form h2 {
   margin-bottom: 10px;
-  font-size: 24px; /* Ajustado o tamanho do título */
+  font-size: 24px;
 }
 
 .edit-form input {
   display: block;
   width: 100%;
-  padding: 8px; /* Reduzido para um padding mais compacto */
+  padding: 8px;
   margin-bottom: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -116,18 +114,18 @@ table .id {
 }
 
 .edit-form input:focus {
-  border-color: #e91e63; /* Mudança de cor ao focar */
+  border-color: #e91e63;
 }
 
 .edit-form button {
   background-color: #e91e63;
   color: white;
-  padding: 8px 15px; /* Reduzido para um tamanho mais compacto */
+  padding: 8px 15px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
-  font-size: 14px; /* Ajustado o tamanho da fonte */
+  font-size: 14px;
 }
 
 .edit-form button:hover {
@@ -137,13 +135,13 @@ table .id {
 /* Estilo dos Botões */
 .product-actions {
   display: flex;
-  gap: 10px; /* Adicionando espaço entre os botões */
+  gap: 10px; /* Espaço entre os botões */
 }
 
 .edit-button {
-  background-color: #007bff; /* Cor do botão Editar */
+  background-color: #007bff;
   color: white;
-  padding: 8px 15px; /* Reduzido para um tamanho mais compacto */
+  padding: 8px 15px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -151,13 +149,13 @@ table .id {
 }
 
 .edit-button:hover {
-  background-color: #0056b3; /* Cor do botão Editar ao passar o mouse */
+  background-color: #0056b3;
 }
 
 .delete-button {
-  background-color: #dc3545; /* Cor do botão Excluir */
+  background-color: #dc3545;
   color: white;
-  padding: 8px 15px; /* Reduzido para um tamanho mais compacto */
+  padding: 8px 15px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -165,5 +163,5 @@ table .id {
 }
 
 .delete-button:hover {
-  background-color: #c82333; /* Cor do botão Excluir ao passar o mouse */
+  background-color: #c82333;
 }

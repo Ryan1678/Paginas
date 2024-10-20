@@ -1,139 +1,147 @@
-/* Fonte global e reset */
-body {
-  font-family: 'Poppins', sans-serif;
+/* Container Principal */
+.container {
+
+  width: 100%;
+  height: 100vh;
   margin: 0;
   padding: 0;
-  background-color: #ffffff; /* Fundo branco */
-  color: #333;
+  overflow: hidden; /* Para evitar scroll lateral */
 }
 
-/* Container principal da tela de produtos */
-.products-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adaptação responsiva */
-  gap: 30px;
-  padding: 50px;
-  background-color: #f9f9f9; /* Fundo suave para contraste */
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Sombra para o container */
-}
-
-/* Estilos para cada card de produto */
-.product-card {
-  background-color: #ffffff; /* Branco para os cards */
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.product-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); /* Sombra mais pronunciada ao passar o mouse */
-}
-
-/* Imagem do produto */
-.product-image {
-  width: 100%;
-  height: 240px; /* Altura consistente para a imagem */
-  object-fit: cover;
-  border-bottom: 4px solid #ff6b81; /* Borda colorida */
-}
-
-/* Informações do produto */
-.product-info {
+/* Conteúdo Principal */
+.main-content {
+  flex: 1;
   padding: 20px;
-  text-align: center;
+  background-color: #f9f9f9;
+  overflow-y: auto;
 }
 
-.product-name {
-  font-size: 20px;
-  font-weight: 600;
-  color: #2c3e50;
-  margin-bottom: 10px;
-  text-transform: capitalize;
+/* Tabela de Pedidos */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 20px;
 }
 
-.product-price {
-  color: #e74c3c;
-  font-size: 22px;
-  font-weight: bold;
-  margin-bottom: 10px;
+table th, table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  vertical-align: middle; /* Garante que o conteúdo fique centralizado verticalmente */
 }
 
-/* Botões de ação */
-.product-actions {
-  display: flex;
-  justify-content: center;
-  gap: 50px; /* Aumenta a distância entre os botões */
-  padding: 15px;
-  border-top: 1px solid #eaeaea;
+table th {
+  background-color: #f5f5f5;
 }
 
-/* Estilos do botão de editar */
-.edit-button {
-  padding: 12px 24px;
-  background-color: #ff6b81; /* Rosa para o botão de editar */
-  color: white;
-  border: none;
-  border-radius: 10px; /* Bordas arredondadas */
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
 }
 
-.edit-button:hover {
-  background-color: #ff4757; /* Tom mais escuro ao passar o mouse */
+/* Estilo para truncar a descrição e evitar quebra de linha */
+table td.descricao {
+  max-width: 200px; /* Define a largura máxima para a célula da descrição */
+  white-space: nowrap; /* Impede que o texto quebre em várias linhas */
+  overflow: hidden; /* Oculta o texto que ultrapassa o tamanho da célula */
+  text-overflow: ellipsis; /* Adiciona "..." no fim do texto longo */
 }
 
-.edit-button:active {
-  transform: scale(0.95); /* Efeito de clique */
-  box-shadow: none; /* Remove a sombra ao clicar */
-}
-
-/* Estilos do botão de excluir */
-.delete-button {
-  padding: 12px 24px;
-  background-color: #e74c3c; /* Vermelho para o botão de excluir */
-  color: white;
-  border: none;
-  border-radius: 10px; /* Bordas arredondadas */
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.delete-button:hover {
-  background-color: #c0392b; /* Tom mais escuro ao passar o mouse */
-  transform: translateY(-3px); /* Levitar */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra ao passar o mouse */
-}
-
-.delete-button:active {
-  transform: scale(0.95); /* Efeito de clique */
-  box-shadow: none; /* Remove a sombra ao clicar */
-}
-
-/* Efeitos e acessibilidade */
-input, button {
-  outline: none;
-}
-
-input:focus, button:focus {
-  box-shadow: 0 0 8px rgba(255, 107, 129, 0.5);
+/* ID Colorido */
+table .id {
+  color: #e91e63;
 }
 
 /* Responsividade */
-@media (max-width: 768px) {
-  .products-container {
-    padding: 20px; /* Menos padding em telas menores */
+@media (max-width: 1024px) {
+  .filters {
+    grid-template-columns: repeat(2, 1fr); /* Duas colunas */
   }
 }
 
-@media (max-width: 480px) {
-  .products-container {
-    grid-template-columns: 1fr; /* Uma coluna em telas pequenas */
+@media (max-width: 768px) {
+  .filters {
+    grid-template-columns: 1fr; /* Uma coluna */
   }
+
+  .main-content {
+    padding: 10px; /* Reduzido para telas menores */
+  }
+}
+
+/* Formulário de Edição */
+.edit-form {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.edit-form h2 {
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+.edit-form input {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: border-color 0.3s;
+}
+
+.edit-form input:focus {
+  border-color: #e91e63;
+}
+
+.edit-form button {
+  background-color: #e91e63;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 14px;
+}
+
+.edit-form button:hover {
+  background-color: #d81b60;
+}
+
+/* Estilo dos Botões */
+.product-actions {
+  display: flex;
+  gap: 10px; /* Espaço entre os botões */
+}
+
+.edit-button, .delete-button {
+  padding: 8px 15px; /* Tamanho compacto */
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.edit-button {
+  background-color: #007bff;
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
+}
+
+.delete-button {
+  background-color: #dc3545;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
 }
